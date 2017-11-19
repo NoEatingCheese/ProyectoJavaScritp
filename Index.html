@@ -1,12 +1,38 @@
 <html>
 
-<title>Hola mundo</title>
+<title>Practica Java Script</title>
 
+
+<head>
+<script>
+var nombre = "Cheese";
+console.log(nombre);
+//alert(nombre);
+
+function ciclo(hasta)
+{
+for(var i =1; i <= hasta; i++)
+{
+console.log(i);
+}
+var total = (hasta+1) * (hasta/2);
+console.log(total);
+};
+ciclo(5)
+
+function recorrer()
+{
+console.log("Funciona");
+};
+</script>
 </head>
 
 <body>
 
 <h1>Hola Mundo</h1>
+<input id="numero">
+<button onclick= "recorrer();">Correr</button>
 
 </body>
+
 </html>

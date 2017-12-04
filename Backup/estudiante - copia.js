@@ -1,8 +1,8 @@
 var Estudiantes = function()
 	{
 		var self=this;
-		self.row = 0;
-		self.id = "";
+		//self.row = 0;
+		self.id = 0;
 		self.nombreEstudiante = "";
 		self.matricula = "";
 		self.identificacion = "";
@@ -14,7 +14,7 @@ function addRow(Estudiantes){
 
  var rowEstudiante = "<tr>"
  
-	 +"<td>"+ Estudiantes.row+"</td>"
+	 //+"<td>"+ Estudiantes.row+"</td>"
 	 +"<td>"+ Estudiantes.id+ "</td>"
 	 +"<td>"+ Estudiantes.nombreEstudiante+ "</td>"
 	 +"<td>"+ Estudiantes.matricula+ "</td>"
@@ -56,8 +56,8 @@ $(document).ready(function(){
 	$('#Click').click(function(){
 	//alert("hola");
 	
-	var row = $('#row').val();
-	var id = $('#id').val();
+	//var row = $('#row').val();
+	//var id = $('#id').val();
 	var nombreEstudiante = $('#nombreEstudiante').val();
 	var matricula = $('#matricula').val();
 	var identificacion = $('#identificacion').val();
@@ -65,8 +65,8 @@ $(document).ready(function(){
 	var email = $('#email').val();
 
 	var est = new Estudiantes();
-	est.row = row;
-	est.id = id;
+	//est.row = row;
+	est.id = id + 1;
 	est.nombreEstudiante = nombreEstudiante;
 	est.matricula = matricula;
 	est.identificacion = identificacion;
@@ -86,8 +86,9 @@ $(document).ready(function(){
 	
 	$('#CleanAll').click(function(){
 		
-	myStorage.getItem("Estudiantes");
-	localStorage.clear("Estudiantes");		
+	//myStorage.getItem("Estudiantes");
+	localStorage.clear("Estudiantes");	
+	document.getElementById("Estudiantes").deleteRow("<tr>");	
 	});
 	
 });

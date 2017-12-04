@@ -4,9 +4,9 @@
 <script src="resources/scripts/estudiante.js"></script>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
 
-<title>Registro</title>
+<title>RegistroEstudiantes</title>
 
-<b><center>Registro De Estudiante</center></b>
+<b><center>Registro</center></b>
 
 </head></br>
 
@@ -68,26 +68,21 @@
 </div>
 </form>
 
-<button id='agregar-Estudiante' class= "btn-success active" center>Agregar a Lista</button>
+<button id='Click' class= "btn-success">Registrar</button>
 
-<button id='borrar-seleccionados' class= "btn-danger disabled">Limpiar Lista</button>
-
-
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Id</th>
-							<th>Nombre</th>
-							<th>Matrícula</th>
-							<th>Identificación</th>
-							<th>Teléfono</th>
-							<th>Email</th>
-						</tr>
-					</thead>
-					<tbody id="estudiantes">
-					</tbody>
-				</table>		
+<table border="1" id="Estudiantes" style="width:100%">
+  <tr>
+	<td>row</td>
+    <td>Id</td>
+    <td>Nombre</td>
+	<td>Matricula</td>
+	<td>Identificacion</td>
+	<td>Telefono</td>
+	<td>E-Mail</td>
+  </tr>
+</table>
+		
+<button id='CleanAll' class= "btn-dangerous">Borrar</button>
 
 </body>
 </html>

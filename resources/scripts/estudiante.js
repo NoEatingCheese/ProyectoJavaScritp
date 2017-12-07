@@ -42,14 +42,18 @@ function deleteFila(id)
 	localStorage.removeItem("estudiantes");
 	
 	var listEstudiantes=JSON.parse(estudiantesAlmacenados);
-	for (var i = 0; i < listEstudiantes.length; i++) {
-		if(listEstudiantes[i].id==id){
-			listEstudiantes.splice(i, 1);
-			var rowDelete=document.getElementById("tr"+id).rowIndex-1;
-			document.getElementById("estudiantes").deleteRow(rowDelete);
-			listaEstudiantes=listEstudiantes;
-			grabarEstuduantes();
-			break;
+	for (var i = 0; i < listEstudiantes.length; i++)
+		{
+			if(listEstudiantes[i].id==id)
+			{
+				listEstudiantes.splice(i, 1);
+				
+				var rowDelete=document.getElementById("tr"+id).rowIndex-1;
+				
+				document.getElementById("estudiantes").deleteRow(rowDelete);
+				listaEstudiantes=listEstudiantes;
+				grabarEstuduantes();
+				break;
 		}
 	}
 };	

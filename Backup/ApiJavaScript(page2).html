@@ -1,0 +1,98 @@
+<html>
+<head>
+<script src="resources/scripts/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+
+
+<title>Datos De Usuarios</title>
+
+<script>
+
+
+$(document).ready(function()
+{			
+			var urlParams = new URLSearchParams(window.location.search);
+			var usuario = urlParams.get('idusuario');
+			
+			var localStorage = window.localStorage;
+			var usuarios = {};
+			var dbusuario = localStorage.getItem('usuario');
+			
+				if (dbusuario != null)
+				{
+					usuarios = JSON.parse(dbusuario);
+				}
+				//console.log(usuarios);
+		
+			var root = 'https://jsonplaceholder.typicode.com';
+
+			$.ajax({
+
+				url: root + '/posts/?'+usuario,
+				  method: 'GET'			  
+			})
+			.then(function(data) 
+			{			
+				$.each(data, function(idusuario, u)
+				{
+					var getuser = "<div id='user' class='row'>"+	
+					"<div class='row'>"+		
+					"<div class='col-md-12'>"+	
+					"<h3>"+ u.name +"</h3>"+
+					"</div>"+
+					"</div>"+	
+					"<div class='row'>"+		
+					"<div class='col-md-12'>"+	
+					"<h3>"+ u.email +"</h3>"+
+					"</div>"+
+					"</div>"+
+					"<div class='row'>"+		
+					"<div class='col-md-12'>"+					
+					"<h3>"+ u.address +"</h3>"+
+					"</div>"+
+					"</div>"+
+					"<div class='row'>"+		
+					"<div class='col-md-12'>"+	
+					"<h3>"+ u.phone +"</h3>"+
+					"</div>"+
+					"</div>"+
+					"<div class='row'>"+		
+					"<div class='col-md-12'>"+	
+					"<h3>" + u.website +"</h3>"+
+					"</div>"+
+					"</div>"+
+					"<div class='row'>"+		
+					"<div class='col-md-12'>"+	
+					"<h3>"+ u.company +"</h3>"+
+					"</div>"+
+					"</div>"+
+					"</div>";
+					
+					
+					$("#user").append(getuser);
+				 }) 
+			  
+			});
+			
+		});
+
+
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+	<div id="user" class="row">
+	
+
+	
+	</div>
+	
+
+</div>
+
+</body>
+</html>

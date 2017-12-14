@@ -1,0 +1,139 @@
+<html>
+<head>
+<script src="resources/scripts/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+
+<style>
+.cuadro {
+
+    border: 1px solid black;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    background-color: lightblue;
+	border-radius: 20px;
+	padding:10px;
+}
+</style>
+
+<title>Datos Del Post</title>
+
+<script>
+
+
+$(document).ready(function()
+{			
+			var urlParams = new URLSearchParams(window.location.search);
+			var titulo = urlParams.get('idtitulo');
+			
+			var localStorage = window.localStorage;
+			var titulos = {};
+			var dbtitulo = localStorage.getItem('titulo');
+			
+				if (dbtitulo != null)
+				{
+					titulos = JSON.parse(dbtitulo);
+				}
+				//console.log(titulos);
+		
+			var tituloActual = titulos[titulo-1];
+			
+			$('#nombretitulo').html(tituloActual.title);
+			$('#cuerpodeltitulo').html(tituloActual.body);
+			$('#comentarios').html(tituloActual.body);
+			
+			
+			/*var direccionC = usuarioActual.address;
+
+			$('#direccion').html(direccionC.street+', '+direccionC.suite);//
+			
+			$('#telefono').html(usuarioActual.phone);
+			$('#web').html(usuarioActual.website);
+			
+			var companiaC = usuarioActual.company;
+			
+			$('#compania').html(companiaC.name+', '+companiaC.catchPhrase);*/
+		
+			var root = 'https://jsonplaceholder.typicode.com';
+
+			$.ajax({
+
+				url: root + '/posts/?userId='+titulo,
+				  method: 'GET'			  
+			})
+			.then(function(data) 
+			{			
+							  
+			});
+			
+		});
+
+
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+	<div id="user" class="row" >
+		<div id='user' class='row cuadro alejar'>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>Nombre Del Titulo:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='nombretitulo'></h3>
+				</div>
+			</div>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>Cuerpo Del Titulo:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='cuerpodeltitulo'></h3>
+				</div>
+			</div>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>Comentarios:</h3> 
+				</div>
+				<div class='col-md-10'>			
+					<h3 id='comentarios'></h3>
+				</div>
+			</div>
+			
+			<div class='row'>
+				<div class='col-md-2'>
+					<h3>Telefono:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='telefono'></h3>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-md-2'>
+					<h3>Web-Site:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='web'></h3>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-md-2'>
+					<h3>Compania:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='compania'></h3>
+				</div>
+			</div>
+			
+		</div>
+	</div>	
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html>
+<head>
+<script src="resources/scripts/jquery-3.2.1.min.js"></script>
+<script src="resources/scripts/estudiante.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+
+<title>Registro</title>
+
+<b><center>Registro De Estudiante</center></b>
+
+</head></br>
+
+<body>
+
+<form>
+<div align="center">
+
+<div class= "form-horizontal" >
+ 
+	    <label for="id" class="col-sm-2 control-label">Id:</label>
+    <div class="col-sm-10">
+      <input type="id" class="form-control" id="id" placeholder="Id:">
+    </div>
+	</div>
+
+<div class= "form-horizontal" >
+ 
+	    <label for="nombreEstudiante" class="col-sm-2 control-label">Nombre:</label>
+    <div class="col-sm-10">
+      <input type="nombreEstudiante" class="form-control" id="nombreEstudiante" placeholder="Nombre:">
+    </div>
+	</div>
+
+<div class= "form-horizontal" >
+ 
+	    <label for="matricula" class="col-sm-2 control-label">Matricula:</label>
+    <div class="col-sm-10">
+      <input type="matricula" class="form-control" id="matricula" placeholder="Matricula:">
+    </div>
+	</div>
+
+<div class= "form-horizontal" >
+ 
+	    <label for="identificacion" class="col-sm-2 control-label">Identificacion:</label>
+    <div class="col-sm-10">
+      <input type="identificacion" class="form-control" id="identificacion" placeholder="Identificacion:">
+    </div>
+	</div>
+
+<div class= "form-horizontal" >
+ 
+	    <label for="telefono" class="col-sm-2 control-label">Telefono:</label>
+    <div class="col-sm-10">
+      <input type="telefono" class="form-control" id="telefono" placeholder="Telefono:">
+    </div>
+	</div>
+
+
+<div class= "form-horizontal" >
+ 
+	    <label for="email" class="col-sm-2 control-label">E-Mail:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="email" placeholder="E-Mail:">
+    </div>
+	</div>
+  
+  
+</div>
+</form>
+
+<button id='agregar-Estudiante' class= "btn-success active" center>Agregar a Lista</button>
+
+<button id='borrar-seleccionados' class= "btn-danger disabled">Limpiar Lista</button>
+
+
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Matrícula</th>
+							<th>Identificación</th>
+							<th>Teléfono</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody id="estudiantes">
+					</tbody>
+				</table>		
+
+</body>
+</html>

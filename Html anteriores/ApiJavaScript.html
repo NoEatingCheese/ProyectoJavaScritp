@@ -1,0 +1,117 @@
+<html>
+<head>
+
+<script src="resources/scripts/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+<script src="resources/js/bootstrap.min.js"></script>
+
+<title>Post</title>
+
+<b><center>Api Java Scripts</center></b>
+
+<style>
+p.one {
+    border: 1px solid black;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    background-color: lightblue;
+}
+p.tree{
+	border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+	margin: 30px;
+	text-align: center;
+}
+</style>
+
+<script>
+
+var listaPost=[];
+
+var Post = function()
+{
+	var self = this;
+		self.userId;
+		self.id;
+		self.title;
+		self.body;
+		self.email;
+		self.name;
+		self.username;
+};
+
+function grabarPost()
+{
+	localStorage.setItem('postDb', JSON.stringify(listaPost));
+};
+function deleteFila(id)
+{
+	var postAlmacenados = localStorage.getItem('postDb');
+	localStorage.removeItem("postDb");
+	
+	var listaPost=JSON.parse(postAlmacenados);
+	for (var i = 0; i < listaPost.length; i++)
+		{
+			if(listaPost[i].id==id)
+			{
+				listaPost.splice(i, 1);
+				
+				var rowDelete=document.getElementById("div"+id).rowIndex-1;
+				
+				document.getElementById("postDb").deleteRow(rowDelete);
+				listaPost=listaPost;
+				grabarPost();
+				break;
+		}
+	}
+};
+$(document).ready(function()
+{
+		var root = 'https://jsonplaceholder.typicode.com';
+
+		$.ajax({
+			url: root + '/posts/',			
+			method: 'GET'		  
+		})
+		.then(function(data) 
+		{
+			$.each(data, function(i, post)
+			{
+				var content='<div'+		
+				'<center><p class="tree">'+
+				'<h1>'+'<span id="favorito" class="glyphicon glyphicon-star-empty"/>'+'<a href="C:/JavaScript/ProyectoJavaScritp/ApiJavaScript(page2).html">'+ post.title+'</a>'+'</h1>'+				
+				'<h5>'+post.body+'</h5>'+
+				'<h3>'+post.email+'</h3>'+
+				'</p></center>'+
+				'</div>';
+				
+				$("#titulo_post").append(content);
+				
+			 }) 
+		});	
+		
+		/*<span class="glyphicon glyphicon-star"></span> //onclick="favorito()"
+
+		<span class="glyphicon glyphicon-star-empty"></span>*/ //id='agregar-Estudiante'
+
+	$("#favorito").click(function()
+	{
+		//alert("funciona");
+		console.log("funciona");
+	});
+		
+})
+
+</script>
+
+</head>
+<body>
+
+<h1><label id="titulo_post"></label></h1>
+
+</body>
+</html>

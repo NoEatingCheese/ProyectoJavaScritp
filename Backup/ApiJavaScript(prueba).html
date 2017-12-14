@@ -3,10 +3,11 @@
 <script src="resources/scripts/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
 
-
 <title>Api Java Scripts</title>
 
 <script>
+
+var listaPost=[];
 
 var Post = function()
 {
@@ -23,7 +24,7 @@ $(document).ready(function()
 		var root = 'https://jsonplaceholder.typicode.com';
 
 		$.ajax({
-			url: root + '/posts/',
+			url: root + '/posts/',			
 			method: 'GET'		  
 		})
 		.then(function(data) 
@@ -31,21 +32,16 @@ $(document).ready(function()
 			$.each(data, function(i, post)
 			{
 				var content='<div class=""'+				
-				'<h1>'+ post.title+'</h1>'+
+				'<h1>'+'<a href="C:/JavaScript/ProyectoJavaScritp/ApiJavaScript(page2).html">'+ post.title+'</a>'+'</h1>'+'<input type="checkbox" id="'+post.id+'">'+				
 				'<h5>'+post.body+'</h5>'+
 				'</div>';
 				
-				$("#titulo_post").append(content);//agregar tabla o div o label al cual unir para presentar data
+				$("#titulo_post").append(content);
+				
 			 }) 
-		});
-
-
-
-
-
+		});	
+		
 })
-
-
 
 </script>
 
@@ -53,8 +49,6 @@ $(document).ready(function()
 <body>
 
 <h1><label id="titulo_post"></label></h1>
-
-
 
 </body>
 </html>

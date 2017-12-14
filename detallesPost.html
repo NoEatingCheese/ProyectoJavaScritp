@@ -1,0 +1,162 @@
+<html>
+<head>
+<script src="resources/scripts/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+
+<style>
+.cuadro {
+
+    border: 1px solid black;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    background-color: lightblue;
+	border-radius: 20px;
+	padding:10px;
+}
+</style>
+
+<title>Datos Del Post</title>
+
+<script>
+$(document).ready(function()
+{				
+				var localStorage = window.localStorage;
+				//postFs contenido
+				var postFs ={};
+				
+				var dbPostf = localStorage.getItem('postF');
+				if (dbPostf != null)
+				{
+					postFs = JSON.parse(dbPostf);
+				}
+				
+				//
+				//usuarios contenido
+				var usuarios ={};
+				
+				var dbUsuario = localStorage.getItem('usuario');
+				if (dbUsuario != null)
+				{
+					usuarios = JSON.parse(dbUsuario);
+				}
+				
+				//
+			var urlParams = new URLSearchParams(window.location.search);
+			var titulo = urlParams.get('idtitulo');
+			
+			var localStorage = window.localStorage;
+			var titulos = {};
+			var dbtitulo = localStorage.getItem('titulo');
+			
+				if (dbtitulo != null)
+				{
+					titulos = JSON.parse(dbtitulo);
+				}				
+			//users
+			var tituloActual = usuarios[titulo-1];
+			
+			$('#nombreusuario').html(tituloActual.name);
+			$('#usuarioemail').html(tituloActual.email);
+			//post
+			var tituloActual = postFs[titulo-1];
+			
+			$('#usuariotitulo').html(tituloActual.title);
+			$('#usuariotitulocuerpo').html(tituloActual.body);
+			//
+		
+			var root = 'https://jsonplaceholder.typicode.com';
+
+			$.ajax({
+
+				url: root + '/comments/?postId='+titulo,
+				  method: 'GET'			  
+			})
+			.then(function(data) 
+			{
+				 $.each(data, function(i, c)
+				{
+					var comments = "<div id='comments' class='row cuadro alejar'>"+
+					"<div class='row'>"+
+					" <div class='col-md-12'>"+
+					"  <h3>Comentario #"+" "+ c.id +"</h3>"+
+					" </div>"+
+					"</div>"+
+					"<div class='row'>"+
+					" <div class='col-md-12'>"+
+					"  <h3>"+ c.name +"</h3>"+
+					" </div>"+
+					"</div>"+
+					"<div class='row'>	"+
+					" <div class='col-md-12'>"+
+					"  <h3>"+ c.body +"</h3>"+
+					" </div>"+
+					"</div>"+
+					"<div class='row'>"+
+					" <div class='col-md-12'>"+	
+					"  <h3>"+ c.email +"</h3>"+
+					" </div>"+
+					"</div>"+
+					
+					"</div>";
+					
+					$("#comments").append(comments);
+				});
+				
+			});
+			
+		});
+
+
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+	<div id="comments" class="row" >
+				
+		<div id='PostsYUsers' class='row cuadro alejar'>
+		  <h1><center><b>Titulo Seleccionado:</b></center></h1>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>Escritor:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='nombreusuario'></h3>
+				</div>
+			</div>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>E-mail:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='usuarioemail'></h3>
+				</div>
+			</div>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>Titulo:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='usuariotitulo'></h3>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-md-12'>
+					<h3 id='usuariotitulocuerpo'></h3>
+				</div>
+			</div>
+		</div>
+		<h1><center><b>Comentarios:</b></center></h1>
+
+	
+	</div>	
+
+</div>
+
+</body>
+</html>

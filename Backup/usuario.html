@@ -1,0 +1,140 @@
+<html>
+<head>
+<script src="resources/scripts/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+
+<style>
+.cuadro {
+
+    border: 1px solid black;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    background-color: lightblue;
+	border-radius: 20px;
+}
+
+.alejar{
+	padding:10px;
+	
+}
+</style>
+
+<title>Datos De Usuarios</title>
+
+<script>
+
+
+$(document).ready(function()
+{			
+			var urlParams = new URLSearchParams(window.location.search);
+			var usuario = urlParams.get('idusuario');
+			
+			var localStorage = window.localStorage;
+			var usuarios = {};
+			var dbusuario = localStorage.getItem('usuario');
+			
+				if (dbusuario != null)
+				{
+					usuarios = JSON.parse(dbusuario);
+				}
+				//console.log(usuarios);
+		
+			var usuarioActual = usuarios[usuario-1];
+			
+			$('#nombreusuario').html(usuarioActual.name);
+			$('#email').html(usuarioActual.email);
+			
+			
+			var direccionC = usuarioActual.address;
+
+			$('#direccion').html(direccionC.street+', '+direccionC.suite);//
+			
+			$('#telefono').html(usuarioActual.phone);
+			$('#web').html(usuarioActual.website);
+			
+			var companiaC = usuarioActual.company;
+			
+			$('#compania').html(companiaC.name+', '+companiaC.catchPhrase);//
+		
+			var root = 'https://jsonplaceholder.typicode.com';
+
+			$.ajax({
+
+				url: root + '/posts/?userId='+usuario,
+				  method: 'GET'			  
+			})
+			.then(function(data) 
+			{			
+							  
+			});
+			
+		});
+
+
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+	<div id="user" class="row" >
+		<div id='user' class='row cuadro alejar'>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>Nombre:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='nombreusuario'></h3>
+				</div>
+			</div>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>E-mail:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='email'></h3>
+				</div>
+			</div>
+			<div class='row'>	
+				<div class='col-md-2'>
+					<h3>Direccion:</h3> 
+				</div>
+				<div class='col-md-10'>			
+					<h3 id='direccion'></h3>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-md-2'>
+					<h3>Telefono:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='telefono'></h3>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-md-2'>
+					<h3>Web-Site:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='web'></h3>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-md-2'>
+					<h3>Compania:</h3> 
+				</div>
+				<div class='col-md-10'>
+					<h3 id='compania'></h3>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+</div>
+
+</body>
+</html>

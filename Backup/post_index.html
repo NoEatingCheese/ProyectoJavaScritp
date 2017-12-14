@@ -1,0 +1,219 @@
+<html>
+<head> 
+<script src="resources/scripts/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+
+<style>
+
+.publicador
+{
+	color: grey;
+}
+.cuadro {
+
+    border: 3px solid black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 150px;
+    margin-left: 80px;
+    background-color: white;
+	border-radius: 20px;
+	padding: 10px;
+}
+
+
+</style>
+
+
+<script>
+function cargarPost()
+{
+		var root = 'https://jsonplaceholder.typicode.com';
+		
+		$.ajax({
+			url: root + '/posts/',			
+			method: 'GET'		  
+		})
+		.then(function(data) 
+		{
+		
+				var localStorage = window.localStorage;
+				//usuarios contenido
+				var usuarios ={};
+				
+				var dbUsuario = localStorage.getItem('usuario');
+				if (dbUsuario != null)
+				{
+					usuarios = JSON.parse(dbUsuario);
+				}
+				//titulos contenido
+				var titulos ={};
+				
+				var dbtitulo = localStorage.getItem('titulo');
+				if (dbtitulo != null)
+				{
+					titulos = JSON.parse(dbtitulo);
+				}
+				//post favoritos
+				var postFavorito = [];
+				
+				var dbPostFavorito = localStorage.getItem('postFavorito');
+				if (dbPostFavorito != null)
+				{
+					postFavorito = JSON.parse(dbPostFavorito);
+				}
+		
+			$.each(data, function(i, p)
+			{
+				var existe = p.id in postFavorito;
+				console.log(existe);
+				
+				var post = "<div id='post' class='row cuadro'>"+	
+				"<div class='row'>"+		
+				"<div class='col-md-12'>"+	
+				"<h3>"+"<a href='detallesPost.html'>" + p.title +"</a>"+"</h3>"+
+				"</div>"+
+				"</div>"+
+				"<div class='row'>"+		
+				"<div class='col-md-10'>"+
+				"<a  class='publicador'>"+
+				"<h3>"+"<span class='glyphicon glyphicon-user' />"+" "+"<a href='usuario.html?idusuario="+p.userId+"'>" + usuarios[p.userId-1].name +"</a>"+"<a href='usuario.html'>"+" "+"<span class='glyphicon glyphicon-envelope' />"+" "+ usuarios[p.userId-1].email +"</a>"+"</h3>"+
+				"</a>"+
+				"</div>"+
+				"<div class='col-md-2'>"+
+				"<button type='button' class='btn glyphicon "+(existe ?  'glyphicon-star' : 'glyphicon-star-empty' )+" post-botom' data-postid='"+p.id+"'/>"+
+				"</div>"+			
+				"</div>"+		
+				"<div class='row'>"+		
+				"<div class='col-md-12'>"+
+				"<p>" + p.body + "</p>"+
+				"</div>"+		
+				"</div>"+	
+				"</div>";
+				
+				$("#post").append(post);
+			
+			});
+
+			
+			$(".post-botom").click(function(){
+				var postid = $(this).data('postid');
+					
+				var existe = agregarPostFavorito(postid);
+				
+				$(this).removeClass(existe ? 'glyphicon-star-empty':'glyphicon-star');
+				$(this).addClass(existe ? 'glyphicon-star': 'glyphicon-star-empty');
+				
+				/*if(existe)
+				{
+					$(this).removeClass('glyphicon-star-empty');
+					$(this).addClass('glyphicon-star');
+				}
+				else
+				{
+					$(this).removeClass('glyphicon-star');
+					$(this).addClass('glyphicon-star-empty');
+				}*/
+				
+			
+			
+			});
+		});	
+		//
+
+
+		
+}
+function cargarusuario()
+{
+			var root = 'https://jsonplaceholder.typicode.com';
+
+		$.ajax({
+			url: root + '/users/',			
+			method: 'GET'		  
+		})
+		.then(function(data) 
+		{		
+			var localStorage = window.localStorage;
+			localStorage.setItem('usuario', JSON.stringify(data));
+			
+		});
+}
+function cargartitulo()
+{
+			var root = 'https://jsonplaceholder.typicode.com';
+
+		$.ajax({
+			url: root + '/posts/',			
+			method: 'GET'		  
+		})
+		.then(function(data) 
+		{		
+			var localStorage = window.localStorage;
+			localStorage.setItem('titulo', JSON.stringify(data));
+			
+		});
+}
+
+function agregarPostFavorito(postid)
+{
+	var localStorage = window.localStorage;
+	
+	var postFavorito = {};
+	
+	var dbPostFavorito = localStorage.getItem('postFavorito');
+	if (dbPostFavorito != null)
+	{
+		postFavorito = JSON.parse(dbPostFavorito);
+	}
+	
+	
+		var existe = false;
+		if(postid in postFavorito){
+			delete postFavorito[postid];
+		}
+		else
+		{		
+			existe = true;
+			postFavorito[postid] = true;
+		}
+		localStorage.setItem('postFavorito', JSON.stringify(postFavorito));
+		return existe;
+	
+}
+
+$(document).ready(function()
+{
+cargarusuario();
+	cargarPost();
+	
+	
+	
+});
+
+
+
+
+
+</script>
+
+<title>Post index</title>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<div id="post" class="row">
+	
+
+	
+	</div>
+	
+
+</div>
+
+</body>
+</html>
